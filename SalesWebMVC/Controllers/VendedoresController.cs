@@ -1,12 +1,20 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SalesWebMVC.Services;
 
 namespace SalesWebMVC.Controllers
 {
     public class VendedoresController : Controller
     {
-        public IActionResult Index()
+        private readonly VendedorService _vendedorService;
+
+        public VendedoresController(VendedorService vendedorService)
         {
-            return View();
+            _vendedorService = vendedorService;
+        }
+        public IActionResult Index() 
+        {
+            var list = _vendedorService.buscarTodos();
+            return View(list);
         }
     }
 }
